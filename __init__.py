@@ -1,2 +1,0 @@
-from checker import give_error_report_video
-from checker import give_error_report_audio
