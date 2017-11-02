@@ -102,18 +102,13 @@ def check_basic_level_video(basic_level, line_number, word):
         error_log.append([word, line_number, "labeled_object.basic_level"])
 
 
-def give_error_report_video(filepath):
+def give_error_report_video(info):
     global error_log
     error_log = []
     global ordinal_list
     ordinal_list = []
-    video_info = []
-    with open(filepath, 'rt') as csvfileR:
-        reader = csv.reader(csvfileR)
-        for row in reader:
-            video_info.append(row)
 
-    colName = video_info[0]
+    colName = info[0]
     for i in range(len(colName)):
         if colName[i] == "labeled_object.ordinal":
             ordinalI = i
@@ -134,7 +129,7 @@ def give_error_report_video(filepath):
 
     total_lines = len(video_info)
     line_number = 1
-    for row in video_info:
+    for row in info:
         if not line_number == 1:
             check_ordinal_video(row[ordinalI], str(line_number), row[objI], total_lines, ordinal_list)
             check_onset_video(row[onsetI], str(line_number), row[objI])
@@ -218,16 +213,11 @@ def check_basic_level_audio(basic_level, line_number, word):
         error_log.append([word, line_number, "basic_level"])
 
 
-def give_error_report_audio(filepath):
+def give_error_report_audio(info):
     global error_log
     error_log = []
-    audio_info = []
-    with open(filepath, 'rt') as csvfileR:
-        reader = csv.reader(csvfileR)
-        for row in reader:
-            audio_info.append(row)
 
-    colName = audio_info[0]
+    colName = info[0]
     for i in range(len(colName)):
         if colName[i] == "tier":
             tierI = i
@@ -245,7 +235,7 @@ def give_error_report_audio(filepath):
             basicI = i
 
     line_number = 1
-    for row in audio_info: 
+    for row in info: 
         if not line_number == 1:
             check_tier_audio(row[tierI], str(line_number), row[wordI])
             check_word_audio(row[wordI], str(line_number))
@@ -256,6 +246,20 @@ def give_error_report_audio(filepath):
             if len(row) > 6:
                 check_basic_level_audio(row[basicI], str(line_number), row[wordI])
         line_number += 1
+    return error_log
+
+def give_error_report(filepath):
+    info = []
+    with open(filepath, 'rt') as csvfileR:
+        reader = csv.reader(csvfileR)
+        for row in reader:
+            info.append(row)
+
+    if "word" in info[0]:
+        error_log = give_error_report_audio(info)
+    else:
+        error_log = give_error_report_video(info)
+
     return error_log
 
 
