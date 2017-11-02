@@ -1,0 +1,2 @@
+from checker import give_error_report
+from spellcheck import spellcheck
