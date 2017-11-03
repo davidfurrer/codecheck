@@ -24,9 +24,9 @@ def check_ordinal_video(ordinal, line_number, word, total_lines, ordinal_list):
         assert(int_digits >= 0 and int_digits <= total_lines - 1)
 
     except AssertionError:
-        error_log.append([word, line_number, "labeled_object.ordinal"])
+        return False
 
-    ordinal_list.append(ordinal)
+    return True
     
 
 def check_onset_video(onset, line_number, word):
@@ -34,6 +34,9 @@ def check_onset_video(onset, line_number, word):
         assert(x.isdigit() for x in onset)
     except AssertionError:
         error_log.append([word, line_number, "labeled_object.onset"])
+        return False
+
+    return True
 
 
 def check_offset_video(offset, line_number, word):
@@ -50,6 +53,9 @@ def check_object_video(obj, line_number):
 	            assert (char.isalpha() or char == "+" or char == "'")
     except AssertionError:
         error_log.append([obj, line_number, "labeled_object.object"])
+        return False
+
+    return True
 
 
 def check_utterance_type_video(utterance_type, line_number, word):
@@ -60,6 +66,9 @@ def check_utterance_type_video(utterance_type, line_number, word):
         	assert (utterance_type in acceptable_utterance_types)
     except AssertionError:
         error_log.append([word, line_number, "labeled_object.utterance_type"])
+        return False
+        
+    return True
 
 
 def check_object_present_video(obj_pres, line_number, word):
@@ -70,6 +79,9 @@ def check_object_present_video(obj_pres, line_number, word):
         	assert(obj_pres == "y" or obj_pres == "n" or obj_pres == "o" or obj_pres == "u")
     except AssertionError:
         error_log.append([word, line_number, "labeled_object.object_present"])
+        return False
+        
+    return True
 
 def isValid(speaker):
     if len(speaker) != 3: return False
@@ -89,6 +101,9 @@ def check_speaker_video(speaker, line_number, word):
 		assert(isValid(speaker))
 	except AssertionError:
 		error_log.append([word, line_number, "labeled_object.speaker"])
+        return False
+        
+    return True
 
 
 def check_basic_level_video(basic_level, line_number, word):
@@ -100,48 +115,10 @@ def check_basic_level_video(basic_level, line_number, word):
 	        assert (char.isalpha() or char == "+" or char == "'" or char == " ")
     except AssertionError:
         error_log.append([word, line_number, "labeled_object.basic_level"])
+        return False
+        
+    return True
 
-
-def give_error_report_video(info):
-    global error_log
-    error_log = []
-    global ordinal_list
-    ordinal_list = []
-
-    colName = info[0]
-    for i in range(len(colName)):
-        if colName[i] == "labeled_object.ordinal":
-            ordinalI = i
-        elif colName[i] == "labeled_object.onset":
-            onsetI = i
-        elif colName[i] == "labeled_object.offset":
-            offsetI = i
-        elif colName[i] == "labeled_object.utterance_type":
-            utterI = i
-        elif colName[i] == "labeled_object.object":
-            objI = i
-        elif colName[i] == "labeled_object.object_present":
-            obj_preI = i
-        elif colName[i] == "labeled_object.speaker":
-            speakerI = i
-        elif colName[i] == "labeled_object.basic_level" or colName[i] == "basic_level":
-            basicI = i
-
-    total_lines = len(video_info)
-    line_number = 1
-    for row in info:
-        if not line_number == 1:
-            check_ordinal_video(row[ordinalI], str(line_number), row[objI], total_lines, ordinal_list)
-            check_onset_video(row[onsetI], str(line_number), row[objI])
-            check_offset_video(row[offsetI], str(line_number), row[objI])
-            check_object_video(row[objI], str(line_number))
-            check_utterance_type_video(row[utterI], str(line_number), row[objI])
-            check_object_present_video(row[obj_preI], str(line_number), row[objI])
-            check_speaker_video(row[speakerI], str(line_number), row[objI])
-            if len(row) > 7:
-                check_basic_level_video(row[basicI], str(line_number), row[objI])
-        line_number += 1
-    return error_log
 
 #Functions to check for audio files
 
@@ -153,6 +130,9 @@ def check_tier_audio(tier, line_number, word):
         assert(tier in acceptable_tier)
     except AssertionError:
         error_log.append([word, line_number, "tier"])
+        return False
+        
+    return True
 
 
 def check_word_audio(word, line_number):
@@ -161,6 +141,9 @@ def check_word_audio(word, line_number):
             assert (char.isalpha() or char == "+" or char == "'")
     except AssertionError:
         error_log.append([word, line_number, "word"])
+        return False
+        
+    return True
 
 
 def check_utterance_type_audio(utterance_type, line_number, word):
@@ -168,6 +151,9 @@ def check_utterance_type_audio(utterance_type, line_number, word):
         assert (utterance_type in acceptable_utterance_types)
     except AssertionError:
         error_log.append([word, line_number, "utterance_type"])
+        return False
+        
+    return True
 
 
 def check_object_present_audio(obj_pres, line_number, word):
@@ -175,6 +161,9 @@ def check_object_present_audio(obj_pres, line_number, word):
         assert(obj_pres == "y" or obj_pres == "n" or obj_pres == "u" or obj_pres == "o")
     except AssertionError:
         error_log.append([word, line_number, "object_present"])
+        return False
+        
+    return True
 
 
 def check_speaker_audio(speaker, line_number,word):
@@ -184,7 +173,10 @@ def check_speaker_audio(speaker, line_number,word):
 	else:
 	    assert(isValid(speaker))
     except AssertionError:
-	error_log.append([word, line_number, "labeled_object.speaker"])
+    	error_log.append([word, line_number, "labeled_object.speaker"])
+        return False
+        
+    return True
 
 
 def check_timestamp_audio(timestamp, line_number, word):
