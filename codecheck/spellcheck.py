@@ -2,11 +2,11 @@ import csv
 import pandas
 import distance
 
-def spellcheck(file, n):
-	wordlist = getList(n)
-	hasBasic, isAudio = clean(file)
+def spellcheck(word, n):
 
-	df = pd.read_csv(file, header = 0, keep_default_na=False)
+	wordlist = getList(n)
+
+	return (word, wordlist)
 
 def getList(n):
 	freqFile = "word_freq.csv"
@@ -14,7 +14,7 @@ def getList(n):
 	with open(freqFile, 'rU') as readfile:
 		reader = csv.reader(readfile)
 		for row in reader:
-			for word in row:
+			for word in row[0:n]:
 				if "+" in word:
 					wordlist.extend([s.lower().replace(" ", "") for s in word.split("+")])
 				else:
@@ -31,26 +31,3 @@ def hasMatch(word, wordlist):
 		minDis = min(dis, maxDis)
 
 	return minDis == 0
-
-
-def clean(file):
-	rowlist = []
-	hasBasic = True
-	isAudio = True
-	with open(file, 'rU') as readfile:
-		reader = csv.reader(readfile)
-		rowlist = [l for l in reader]
-		for row in rowlist:
-			if row[-1] == "":
-				del row[-1]
-		if "basic_level" not in rowlist[0] and "labeled_object.basic_level" not in rowlist[0]:
-			hasBasic = False
-			if not "word" in rowlist[0]:
-				isAudio = False
-
-	with open(file, 'wb') as writefile:
-		writer = csv.writer(writefile)
-		for n in rowlist:
-			writer.writerow(n)
-
-	return hasBasic, isAudio
