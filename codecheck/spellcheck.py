@@ -2,7 +2,7 @@ import csv
 import pandas
 import distance
 
-def spellcheck(word, n):
+def spellcheck(word, n = 1000):
 
 	wordlist = getList(n)
 
