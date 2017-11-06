@@ -1,13 +1,20 @@
 import csv
 import pandas
 import distance
+import operator
 
-def spellcheck(word, n = 1000):
+# spell check given word, return if it matches up with word inside the frequency
+# if no matches found, a list of suggesting word would be returned 
+def spellcheck(word, freqN = 1000, suggestN = 3):
 
-	wordlist = getList(n)
+	wordlist = getList(freqN)
 
-	return hasMatch(word, wordlist)
+	if word in wordlist:
+		return True, 0
+	else:
+		return False, getMatch(word, wordlist, suggestN)
 
+# get word frequency list from the ordered word csv, return a list of top n word
 def getList(n):
 	freqFile = "word_freq.csv"
 	wordlist = []
@@ -22,13 +29,18 @@ def getList(n):
 
 	return wordlist
 
-def hasMatch(word, wordlist):
+# return a list of word with the closest distance
+def getMatch(word, wordlist, suggestN):
 	word = word.lower().replace(" ", "")
 	minDis = float("inf")
+	disMap = {}
 
 	for item in wordlist:
 		dis = distance.levenshtein(word, item)
-		minDis = min(dis, minDis)
+		disMap[item] = dis
+
+	sorted_list = sorted(disMap.items(), key = operator.itemgetter(1))
+	sorted_list = [each[0] for each in sorted_list]
 
 
-	return minDis == 0
+	return sorted_list[:suggestN]
