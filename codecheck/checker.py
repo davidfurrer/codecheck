@@ -7,7 +7,7 @@ acceptable_utterance_types = ['s', 'n', 'd', 'r', 'q', 'i', 'o', 'u']
 comment = "%com:"
 
 
-def check_ordinal_video(ordinal, total_lines, ordinal_list):
+def check_ordinal_video(ordinal, total_lines = 0, ordinal_list = 0):
     digit_list = ['0']
     for y in ordinal:
         if y.isdigit():
