@@ -84,7 +84,8 @@ def check_object_present_video(obj_pres):
     return True
 
 def isValid(speaker):
-    if len(speaker) != 3: return False
+    if len(speaker) != 3: 
+        return False
     if speaker[0].isalpha() and speaker[0].isupper():
         if speaker[1].isalpha() and speaker[1].isupper():
             if speaker[2].isalpha() and speaker[2].isupper():
@@ -94,12 +95,12 @@ def isValid(speaker):
     return False
 
 def check_speaker_video(speaker):
-	try:
-            if word.startswith(comment):
-		assert (speaker == "NA")
-	    else:
-		assert(isValid(speaker))
-	except AssertionError:
+    try:
+        if word.startswith(comment):
+            assert (speaker == "NA")
+        else:
+            assert(isValid(speaker))
+    except AssertionError:
         return False
         
     return True
@@ -110,8 +111,8 @@ def check_basic_level_video(basic_level):
     	if word.startswith(comment):
     	    assert (basic_level == "NA")
     	else:
-	    for char in basic_level:
-	        assert (char.isalpha() or char == "+" or char == "'" or char == " ")
+            for char in basic_level:
+                assert (char.isalpha() or char == "+" or char == "'" or char == " ")
     except AssertionError:
         return False
         

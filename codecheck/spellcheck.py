@@ -2,11 +2,11 @@ import csv
 import pandas
 import distance
 
-def spellcheck(word, n):
+def spellcheck(word, n = 1000):
 
 	wordlist = getList(n)
 
-	return (word, wordlist)
+	return hasMatch(word, wordlist)
 
 def getList(n):
 	freqFile = "word_freq.csv"
@@ -18,7 +18,7 @@ def getList(n):
 				if "+" in word:
 					wordlist.extend([s.lower().replace(" ", "") for s in word.split("+")])
 				else:
-					word.append(word.lower().replace(" ", ""))
+					wordlist.append(word.lower().replace(" ", ""))
 
 	return wordlist
 
@@ -28,6 +28,7 @@ def hasMatch(word, wordlist):
 
 	for item in wordlist:
 		dis = distance.levenshtein(word, item)
-		minDis = min(dis, maxDis)
+		minDis = min(dis, minDis)
+
 
 	return minDis == 0
