@@ -2,11 +2,10 @@ import sys
 import csv
 
 # Functions to check for video files
-error_log = []
 acceptable_utterance_types = ['s', 'n', 'd', 'r', 'q', 'i', 'o', 'u']
 comment = "%com:"
 
-
+# video ordinal column format checking
 def check_ordinal_video(ordinal, total_lines = 0, ordinal_list = 0):
     digit_list = ['0']
     for y in ordinal:
@@ -30,7 +29,7 @@ def check_ordinal_video(ordinal, total_lines = 0, ordinal_list = 0):
 
     return True
     
-
+# video onset column format checking
 def check_onset_video(onset):
     try:
         assert(x.isdigit() for x in onset)
@@ -39,7 +38,7 @@ def check_onset_video(onset):
 
     return True
 
-
+# video offset column format checking
 def check_offset_video(offset):
     try:
         assert(x.isdigit() for x in offset)
@@ -48,7 +47,7 @@ def check_offset_video(offset):
         
     return True
 
-
+# video object column format checking
 def check_object_video(obj):
     try:
     	if not obj.startswith(comment):
@@ -59,7 +58,7 @@ def check_object_video(obj):
 
     return True
 
-
+# video utterance_type column format checking
 def check_utterance_type_video(utterance_type):
     try:
     	if word.startswith(comment):
@@ -71,7 +70,7 @@ def check_utterance_type_video(utterance_type):
         
     return True
 
-
+# video object_present column format checking
 def check_object_present_video(obj_pres):
     try:
     	if word.startswith(comment):
@@ -83,6 +82,7 @@ def check_object_present_video(obj_pres):
         
     return True
 
+# check if a speaker is valid
 def isValid(speaker):
     if len(speaker) != 3: 
         return False
@@ -94,6 +94,7 @@ def isValid(speaker):
                 return True
     return False
 
+# video speaker column format checking
 def check_speaker_video(speaker):
     try:
         if word.startswith(comment):
@@ -105,7 +106,7 @@ def check_speaker_video(speaker):
         
     return True
 
-
+# video basic_level column format checking
 def check_basic_level_video(basic_level):
     try:
     	if word.startswith(comment):
@@ -124,6 +125,7 @@ def check_basic_level_video(basic_level):
 acceptable_tier = ['*CHF', '*CHN', '*CXF', '*CXN', '*FAF', '*FAN', '*NOF',
                    '*MAF', '*MAN', '*NON', '*OLF', '*OLN', '*SIL', '*TVF', '*TVN']
 
+# audio tier column format checking
 def check_tier_audio(tier):
     try:
         assert(tier in acceptable_tier)
@@ -132,7 +134,7 @@ def check_tier_audio(tier):
         
     return True
 
-
+# audio word column format checking
 def check_word_audio(word):
     try:
         for char in word:
@@ -142,7 +144,7 @@ def check_word_audio(word):
         
     return True
 
-
+# audio utterance_type column format checking
 def check_utterance_type_audio(utterance_type):
     try:
         assert (utterance_type in acceptable_utterance_types)
@@ -151,7 +153,7 @@ def check_utterance_type_audio(utterance_type):
         
     return True
 
-
+# audio object_present column format checking
 def check_object_present_audio(obj_pres):
     try:
         assert(obj_pres == "y" or obj_pres == "n" or obj_pres == "u" or obj_pres == "o")
@@ -160,7 +162,7 @@ def check_object_present_audio(obj_pres):
         
     return True
 
-
+# audio speaker column format checking
 def check_speaker_audio(speaker):
     try:
         if word.startswith(comment):
@@ -172,7 +174,7 @@ def check_speaker_audio(speaker):
         
     return True
 
-
+# audio timestamp column format checking
 def check_timestamp_audio(timestamp):
     underscore_index = timestamp.find("_")
 
@@ -192,7 +194,7 @@ def check_timestamp_audio(timestamp):
     return True
                
     
-
+# audio basic_level column format checking
 def check_basic_level_audio(basic_level):
     try:
         for char in basic_level:
