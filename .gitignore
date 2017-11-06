@@ -1,3 +1,4 @@
 .DS_Store
 *.csv
 !word_freq.csv
+codecheck.egg-info
