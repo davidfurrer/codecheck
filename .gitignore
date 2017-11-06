@@ -2,3 +2,4 @@
 *.csv
 !word_freq.csv
 codecheck.egg-info
+*.pyc
