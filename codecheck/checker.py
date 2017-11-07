@@ -113,7 +113,7 @@ def check_basic_level_video(basic_level, word):
     	    assert (basic_level == "NA")
     	else:
             for char in basic_level:
-                assert (char.isalpha() or char == "+" or char == "'" or char == " ")
+                assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
     except AssertionError:
         return False
         
@@ -199,7 +199,7 @@ def check_timestamp_audio(timestamp):
 def check_basic_level_audio(basic_level):
     try:
         for char in basic_level:
-            assert (char.isalpha() or char == "+" or char == "'" or char == " ")
+            assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
     except AssertionError:
         return False
         
