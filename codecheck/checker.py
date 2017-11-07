@@ -59,7 +59,7 @@ def check_object_video(obj):
     return True
 
 # video utterance_type column format checking
-def check_utterance_type_video(utterance_type):
+def check_utterance_type_video(utterance_type, word):
     try:
     	if word.startswith(comment):
     		assert (utterance_type == "NA")
@@ -71,7 +71,7 @@ def check_utterance_type_video(utterance_type):
     return True
 
 # video object_present column format checking
-def check_object_present_video(obj_pres):
+def check_object_present_video(obj_pres, word):
     try:
     	if word.startswith(comment):
     		assert (obj_pres == "NA")
@@ -95,7 +95,7 @@ def isValid(speaker):
     return False
 
 # video speaker column format checking
-def check_speaker_video(speaker):
+def check_speaker_video(speaker, word):
     try:
         if word.startswith(comment):
             assert (speaker == "NA")
@@ -107,7 +107,7 @@ def check_speaker_video(speaker):
     return True
 
 # video basic_level column format checking
-def check_basic_level_video(basic_level):
+def check_basic_level_video(basic_level, word):
     try:
     	if word.startswith(comment):
     	    assert (basic_level == "NA")
@@ -165,9 +165,10 @@ def check_object_present_audio(obj_pres):
 # audio speaker column format checking
 def check_speaker_audio(speaker):
     try:
-        if word.startswith(comment):
-	    assert (speaker == "NA")
-	else:
+        #currently no comment in audio file for word column, so no check on it
+ #        if word.startswith(comment):
+	#     assert (speaker == "NA")
+	# else:
 	    assert(isValid(speaker))
     except AssertionError:
         return False
