@@ -1,4 +1,5 @@
 import csv
+import os
 import pandas
 import distance
 import operator
@@ -16,7 +17,8 @@ def spellcheck(word, freqN = 1000, suggestN = 3):
 
 # get word frequency list from the ordered word csv, return a list of top n word
 def getList(n):
-	freqFile = "word_freq.csv"
+	this_dir, this_filename = os.path.split(__file__)
+	freqFile = os.path.join(this_dir, "word_freq.csv")
 	wordlist = []
 	with open(freqFile, 'rU') as readfile:
 		reader = csv.reader(readfile)
