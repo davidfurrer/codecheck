@@ -5,4 +5,5 @@ setup(name = 'codecheck',
 	description = 'Checker scripts for basic_level files',
 	url = 'https://github.com/BergelsonLab/codecheck',
 	author = 'Estelle He, Selen Berkman',
-	packages = ['codecheck'])
+	packages = ['codecheck'],
+	include_package_data=True)
