@@ -59,7 +59,7 @@ def check_object_video(obj):
     return True
 
 # video utterance_type column format checking
-def check_utterance_type_video(utterance_type, word = NA):
+def check_utterance_type_video(utterance_type, word = 0):
     try:
     	if word.startswith(comment):
     		assert (utterance_type == "NA")
@@ -71,7 +71,7 @@ def check_utterance_type_video(utterance_type, word = NA):
     return True
 
 # video object_present column format checking
-def check_object_present_video(obj_pres, word = NA):
+def check_object_present_video(obj_pres, word = 0):
     try:
     	if word.startswith(comment):
     		assert (obj_pres == "NA")
@@ -95,7 +95,7 @@ def isValid(speaker):
     return False
 
 # video speaker column format checking
-def check_speaker_video(speaker, word = NA):
+def check_speaker_video(speaker, word = 0):
     try:
         if word.startswith(comment):
             assert (speaker == "NA")
@@ -107,7 +107,7 @@ def check_speaker_video(speaker, word = NA):
     return True
 
 # video basic_level column format checking
-def check_basic_level_video(basic_level, word = NA):
+def check_basic_level_video(basic_level, word = 0):
     try:
     	if word.startswith(comment):
     	    assert (basic_level == "NA")
