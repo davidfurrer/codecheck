@@ -6,10 +6,11 @@ import operator
 
 # spell check given word, return if it matches up with word inside the frequency
 # if no matches found, a list of suggesting word would be returned 
-def spellcheck(word, freqN = 1000, suggestN = 3):
+def spellcheck(word, freqN = 10000, suggestN = 3):
 
 	wordlist = getList(freqN)
 
+	word = word.lower().replace(" ", "")
 	if word in wordlist:
 		return True, 0
 	else:
@@ -24,16 +25,17 @@ def getList(n):
 		reader = csv.reader(readfile)
 		for row in reader:
 			for word in row[0:n]:
+				if word.startswith("%com:"):
+					continue
 				if "+" in word:
 					wordlist.extend([s.lower().replace(" ", "") for s in word.split("+")])
 				else:
 					wordlist.append(word.lower().replace(" ", ""))
 
-	return wordlist
+	return set(wordlist)
 
 # return a list of word with the closest distance
 def getMatch(word, wordlist, suggestN):
-	word = word.lower().replace(" ", "")
 	minDis = float("inf")
 	disMap = {}
 
