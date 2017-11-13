@@ -9,10 +9,10 @@
   - `check_onset_video(onset)`
   - `check_offset_video(offset)`
   - `check_object_video(obj)`
-  - `check_utterance_type_video(utterance_type, word = NA)`
-  - `check_object_present_video(obj_pres, word = NA)`
-  - `check_speaker_video(speaker, word = NA)`
-  - `check_basic_level_video(basic_level, word = NA)`
+  - `check_utterance_type_video(utterance_type, word = 0)`
+  - `check_object_present_video(obj_pres, word = 0)`
+  - `check_speaker_video(speaker, word = 0)`
+  - `check_basic_level_video(basic_level, word = 0)`
   
 - Functions for audio file format checking:
   - `check_tier_audio(tier)`
@@ -29,6 +29,10 @@
 
 - All functions that accept a second parameter *word* are checking if the word column contains a column. If so, an NA would be valid format. If no *word* is passed in, this test would be ignored. 
 
-- `spellcheck(word, n)` is a function that can be used for *word*, *basic_level*, *labeled_object.object* and *labeled_object.basic_level* columns spell-checking.
+- All functinos that check format would return a boolean.
+
+- `spellcheck(word, freqN, suggestN)` is a function that can be used for *word*, *basic_level*, *labeled_object.object* and *labeled_object.basic_level* columns spell-checking.
   - *word* is a string that needs to be spell-checked
-  - *n* is the number of words that *word* need to be compared with from the frequency-ordered word list
+  - *freqN* is the number of words that *word* need to be compared with from the frequency-ordered word list
+  - *suggestN* is the number of suggested words that would be given out as the words closest to *word*
+  - if word is spelled correct, the function would return `true` and `0`; if the word is not in the word list, it would return `false` and list of suggested word
