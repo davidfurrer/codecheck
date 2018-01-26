@@ -13,7 +13,7 @@ def check_ordinal_video(ordinal, total_lines = 0, ordinal_list = 0):
             digit_list.append(y)
     string_digits = ''.join(digit_list)
     int_digits = int(string_digits)
-    
+
     try:
         if ordinal_list:
             #Check for repeat values
@@ -28,7 +28,7 @@ def check_ordinal_video(ordinal, total_lines = 0, ordinal_list = 0):
         return False
 
     return True
-    
+
 # video onset column format checking
 def check_onset_video(onset):
     try:
@@ -44,15 +44,19 @@ def check_offset_video(offset):
         assert(x.isdigit() for x in offset)
     except AssertionError:
         return False
-        
+
     return True
 
 # video object column format checking
 def check_object_video(obj):
+    cap = 0
     try:
     	if not obj.startswith(comment):
 	        for char in obj:
 	            assert (char.isalpha() or char == "+" or char == "'")
+                if cap.isupper():
+                    cap += 1
+            assert (cap <= 1)
     except AssertionError:
         return False
 
@@ -67,7 +71,7 @@ def check_utterance_type_video(utterance_type, word = 0):
         	assert (utterance_type in acceptable_utterance_types)
     except AssertionError:
         return False
-        
+
     return True
 
 # video object_present column format checking
@@ -79,12 +83,12 @@ def check_object_present_video(obj_pres, word = 0):
         	assert(obj_pres == "y" or obj_pres == "n" or obj_pres == "o" or obj_pres == "u")
     except AssertionError:
         return False
-        
+
     return True
 
 # check if a speaker is valid
 def isValid(speaker):
-    if len(speaker) != 3: 
+    if len(speaker) != 3:
         return False
     if speaker[0].isalpha() and speaker[0].isupper():
         if speaker[1].isalpha() and speaker[1].isupper():
@@ -103,20 +107,24 @@ def check_speaker_video(speaker, word = 0):
             assert(isValid(speaker))
     except AssertionError:
         return False
-        
+
     return True
 
 # video basic_level column format checking
 def check_basic_level_video(basic_level, word = 0):
+    cap = 0
     try:
     	if word.startswith(comment):
     	    assert (basic_level == "NA")
     	else:
             for char in basic_level:
                 assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
+                if char.isupper():
+                    cap += 1
+            assert(cap <= 1)
     except AssertionError:
         return False
-        
+
     return True
 
 
@@ -131,17 +139,21 @@ def check_tier_audio(tier):
         assert(tier in acceptable_tier)
     except AssertionError:
         return False
-        
+
     return True
 
 # audio word column format checking
 def check_word_audio(word):
+    cap = 0
     try:
         for char in word:
             assert (char.isalpha() or char == "+" or char == "'")
+            if char.isupper():
+                cap += 1
+        assert(cap <= 1)
     except AssertionError:
         return False
-        
+
     return True
 
 # audio utterance_type column format checking
@@ -150,7 +162,7 @@ def check_utterance_type_audio(utterance_type):
         assert (utterance_type in acceptable_utterance_types)
     except AssertionError:
         return False
-        
+
     return True
 
 # audio object_present column format checking
@@ -159,7 +171,7 @@ def check_object_present_audio(obj_pres):
         assert(obj_pres == "y" or obj_pres == "n" or obj_pres == "u" or obj_pres == "o")
     except AssertionError:
         return False
-        
+
     return True
 
 # audio speaker column format checking
@@ -172,7 +184,7 @@ def check_speaker_audio(speaker):
 	    assert(isValid(speaker))
     except AssertionError:
         return False
-        
+
     return True
 
 # audio timestamp column format checking
@@ -193,17 +205,18 @@ def check_timestamp_audio(timestamp):
             return False
 
     return True
-               
-    
+
+
 # audio basic_level column format checking
 def check_basic_level_audio(basic_level):
+    cap = 0
     try:
         for char in basic_level:
             assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
+            if char.isupper():
+                cap += 1
+        assert(cap <= 1)
     except AssertionError:
         return False
-        
+
     return True
-
-
-
