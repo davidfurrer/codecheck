@@ -52,8 +52,8 @@ def check_object_video(obj):
     cap = 0
     try:
     	if not obj.startswith(comment):
-	        for char in obj:
-	            assert (char.isalpha() or char == "+" or char == "'")
+            for char in obj:
+                assert (char.isalpha() or char == "+" or char == "'")
                 if cap.isupper():
                     cap += 1
             assert (cap <= 1)
@@ -217,6 +217,19 @@ def check_basic_level_audio(basic_level):
                 cap += 1
         assert(cap <= 1)
     except AssertionError:
+        return False
+
+    return True
+
+# general onset offset checking
+def check_onset_offset(onset, offset):
+    try:
+        assert(x.isdigit() for x in onset)
+        assert(x.isdigit() for x in offset)
+        onset = int(onset)
+        offset = int(offset)
+        assert(offset > onset)
+    except (AssertionError, ValueError) as e:
         return False
 
     return True
