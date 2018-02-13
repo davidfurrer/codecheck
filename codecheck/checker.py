@@ -91,10 +91,8 @@ def isValid(speaker):
     if len(speaker) != 3:
         return False
     if speaker[0].isalpha() and speaker[0].isupper():
-        if speaker[1].isalpha() and speaker[1].isupper():
-            if speaker[2].isalpha() and speaker[2].isupper():
-                return True
-            elif speaker[2].isdigit():
+        if (speaker[1].isalpha() and speaker[1].isupper()) or speaker[1].isdigit():
+            if (speaker[2].isalpha() and speaker[2].isupper()) or speaker[2].isdigit():
                 return True
     return False
 
