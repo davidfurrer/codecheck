@@ -115,11 +115,12 @@ def check_basic_level_video(basic_level, word = 0):
     	if word.startswith(comment):
     	    assert (basic_level == "NA")
     	else:
-            for char in basic_level:
-                assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
-                if char.isupper():
-                    cap += 1
-            assert(cap <= 1)
+            if "TIME" not in basic_level and "FIX ME" not in basic_level and "NA" not in basic_level:
+                for char in basic_level:
+                    assert (char.isalpha() or char == "+" or char == "'" or char == " ")
+                    if char.isupper():
+                        cap += 1
+                assert(cap <= 1)
     except AssertionError:
         return False
 
@@ -209,11 +210,12 @@ def check_timestamp_audio(timestamp):
 def check_basic_level_audio(basic_level):
     cap = 0
     try:
-        for char in basic_level:
-            assert (char.isalpha() or char == "+" or char == "'" or char == " " or char == "*")
-            if char.isupper():
-                cap += 1
-        assert(cap <= 1)
+        if "TIME" not in basic_level and "FIX ME" not in basic_level and "NA" not in basic_level:
+            for char in basic_level:
+                assert (char.isalpha() or char == "+" or char == "'" or char == " ")
+                if char.isupper():
+                    cap += 1
+            assert(cap <= 1)
     except AssertionError:
         return False
 
