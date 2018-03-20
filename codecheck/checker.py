@@ -54,7 +54,7 @@ def check_object_video(obj):
     	if not obj.startswith(comment):
             for char in obj:
                 assert (char.isalpha() or char == "+" or char == "'")
-                if cap.isupper():
+                if char.isupper():
                     cap += 1
             assert (cap <= 1)
     except AssertionError:
