@@ -129,8 +129,8 @@ def check_basic_level_video(basic_level, word = 0):
 
 #Functions to check for audio files
 
-acceptable_tier = ['*CHF', '*CHN', '*CXF', '*CXN', '*FAF', '*FAN', '*NOF',
-                   '*MAF', '*MAN', '*NON', '*OLF', '*OLN', '*SIL', '*TVF', '*TVN']
+acceptable_tier = ['CHF', 'CHN', 'CXF', 'CXN', 'FAF', 'FAN', 'NOF',
+                   'MAF', 'MAN', 'NON', 'OLF', 'OLN', 'SIL', 'TVF', 'TVN']
 
 # audio tier column format checking
 def check_tier_audio(tier):
