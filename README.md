@@ -1,6 +1,8 @@
 # codecheck
 
 - This is a python package that can be installed locally through `pip install -e path` where `path` is the absolute path to the local directory for this package
+- If `pip` returns `Permission denied` warning messages, try change directory into the local directory for this package, and run `python setup.py install --user`.
+- To check if installed sucessfully, run `pip list`. You should be able to see the *codecheck* listed if successfully installed. 
 
 - All functions in the codecheck package are used to check string in basic level files
 
