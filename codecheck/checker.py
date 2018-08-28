@@ -132,6 +132,9 @@ def check_basic_level_video(basic_level, word = 0):
 acceptable_tier = ['CHF', 'CHN', 'CXF', 'CXN', 'FAF', 'FAN', 'NOF',
                    'MAF', 'MAN', 'NON', 'OLF', 'OLN', 'SIL', 'TVF', 'TVN']
 
+#FIXME if asterisk is to be kept
+acceptable_tier = ['*'+tier for tier in acceptable_tier]
+
 # audio tier column format checking
 def check_tier_audio(tier):
     try:
