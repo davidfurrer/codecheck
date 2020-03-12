@@ -6,4 +6,6 @@ setup(name = 'codecheck',
 	url = 'https://github.com/BergelsonLab/codecheck',
 	author = 'Estelle He, Selen Berkman',
 	packages = ['codecheck'],
-	include_package_data=True)
+        install_requires=['msgpack', 'distance', 'argparse'],
+	include_package_data=True
+        )
