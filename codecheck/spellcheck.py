@@ -43,7 +43,7 @@ def getMatch(word, wordlist, suggestN):
 		dis = distance.levenshtein(word, item)
 		disMap[item] = dis
 
-	sorted_list = sorted(disMap.items(), key = operator.itemgetter(1))
+	sorted_list = sorted(list(disMap.items()), key = operator.itemgetter(1))
 	sorted_list = [each[0] for each in sorted_list]
 
 
